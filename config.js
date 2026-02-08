@@ -1,14 +1,14 @@
 export const GAME_CONFIG = {
   images: {
-    tiles: [
-      "assets/tiles/1.png",
-      "assets/tiles/2.png",
-      "assets/tiles/3.png",
-      "assets/tiles/4.png",
-      "assets/tiles/5.png",
-    ],
-    win: "assets/win.png",
-  },
+  tiles: [
+    "1.png",
+    "2.png",
+    "3.png",
+    "4.png",
+    "5.png",
+  ],
+  win: "win.png",
+},
 
   levels: [
     { id: 1, rows: 7, cols: 7, moves: 18, targetScore: 900 },
