@@ -96,6 +96,7 @@ body{
 }
 
 #board{
+  --cell: 48px;                /* ✅ 新增：預設格子大小（會被 JS 覆蓋） */
   display:grid;
   gap: 6px;
   justify-content: center;
@@ -106,11 +107,13 @@ body{
   border-radius: 16px;
   background: rgba(255,255,255,.45);
   border: 1px dashed rgba(215,191,169,.55);
+  max-width: 100%;             /* ✅ 新增：棋盤不超出容器 */
 }
 
+/* 讓格子大小自動縮放：不超出螢幕 */
 .cell{
-  width: 54px;
-  height: 54px;
+  width: var(--cell);
+  height: var(--cell);
   border-radius: 14px;
   background: rgba(255,255,255,.72);
   border: 1px solid rgba(215,191,169,.35);
