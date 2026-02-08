@@ -80,7 +80,25 @@ function buildBoardUI(){
   const cellClamped = Math.max(30, Math.min(54, cell));
 
   elBoard.style.setProperty("--cell", `${cellClamped}px`);
-  elBoard.style.gridTemplateColumns = `repeat(${cols}, var(--cell))`;
+  function buildBoardUI(){
+  elBoard.style.gridTemplateColumns = `repeat(${cols}, 44px)`;
+  elBoard.innerHTML = "";
+
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.dataset.r = String(r);
+      cell.dataset.c = String(c);
+
+      const img = document.createElement("img");
+      img.alt = "tile";
+      cell.appendChild(img);
+
+      elBoard.appendChild(cell);
+    }
+  }
+  }
   elBoard.innerHTML = "";
 
   for(let r=0;r<rows;r++){
