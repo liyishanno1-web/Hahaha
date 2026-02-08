@@ -68,7 +68,36 @@ function startLevel(idx){
 }
 
 function buildBoardUI(){
-  elBoard.style.gridTemplateColumns = `repeat(${cols}, 54px)`;
+  // 依螢幕寬度自動縮放格子，避免超出畫面
+  const gap = 6;          // 要跟 CSS 的 gap 一樣
+  const padding = 20;     // board 左右 padding 大約 10+10
+  const safeMargin = 28;  // 再保留一點空間避免貼邊
+
+  const boardMaxWidth = Math.min(window.innerWidth - safeMargin, 980); // 桌機也不會太大
+  const cell = Math.floor((boardMaxWidth - padding - gap * (cols - 1)) / cols);
+
+  // 限制格子大小範圍：太小不好按、太大會爆版
+  const cellClamped = Math.max(30, Math.min(54, cell));
+
+  elBoard.style.setProperty("--cell", `${cellClamped}px`);
+  elBoard.style.gridTemplateColumns = `repeat(${cols}, var(--cell))`;
+  elBoard.innerHTML = "";
+
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const cellEl = document.createElement("div");
+      cellEl.className = "cell";
+      cellEl.dataset.r = String(r);
+      cellEl.dataset.c = String(c);
+
+      const img = document.createElement("img");
+      img.alt = "tile";
+      cellEl.appendChild(img);
+
+      elBoard.appendChild(cellEl);
+    }
+  }
+}
   elBoard.innerHTML = "";
 
   for(let r=0;r<rows;r++){
